@@ -1,5 +1,13 @@
 const HomePage = () => {
-  return <div className="text-3xl font-bold underline">Hello World!</div>;
+  return (
+    <div>
+      <title>Báo VnExpress - Báo tiếng Việt nhiều người xem nhất</title>
+      <div>
+        <h1>Welcome to VnExpress</h1>
+        <p>Your source for the latest news and updates.</p>
+      </div>
+    </div>
+  );
 };
 
 export default HomePage;
