@@ -20,7 +20,16 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
         return res.status(405).json({ message: 'Method not allowed' });
     }
 
-    const { email, password } = req.body;
+    let body = req.body;
+    if (typeof body === "string") {
+        try {
+            body = JSON.parse(body);
+        } catch {
+            return res.status(400).json({ message: 'Invalid JSON' });
+        }
+    }
+
+    const { email, password } = body || {};
 
     if (!email || !password) {
         return res.status(400).json({ message: 'Email và password là bắt buộc' });
