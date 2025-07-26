@@ -2,9 +2,6 @@
   "functions": {
     "api/auth/login.ts": {
       "maxDuration": 10
-    },
-    "api/auth/me.ts": {
-      "maxDuration": 10
     }
   },
   "headers": [
