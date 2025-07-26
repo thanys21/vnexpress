@@ -13,10 +13,49 @@ import {
 } from "../ui/dialog";
 import loginValidation from "./validate";
 import InputField from "../form/fields/InputFIeld";
+import { useAuth } from "@/hooks/useAuth";
+import showToast from "../common/showToast";
+import type { LoginCredentials } from "@/types/auth";
 
 const LoginDialog = () => {
   const [showPasswordBox, setShowPasswordBox] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const { login, logout, isLoading, user, isAuthenticated } = useAuth();
+
+  const handleSubmit = async (values: LoginCredentials) => {
+    try {
+      const success = await login(values);
+      if (success) {
+        setShowPasswordBox(false);
+      } else {
+        showToast("Email hoặc mật khẩu không đúng!");
+      }
+    } catch {
+      showToast("Có lỗi xảy ra, vui lòng thử lại!");
+    }
+  };
+
+  const handleLogout = () => {
+    logout();
+  };
+
+  if (isAuthenticated && user) {
+    return (
+      <div className="flex gap-2 items-center cursor-pointer group">
+        <AccountCircleOutline />
+        <div className="flex flex-col">
+          <span className="text-sm font-medium">{user.name}</span>
+          <Button
+            onClick={handleLogout}
+            className="text-xs text-gray-500 hover:text-red-500 text-left"
+          >
+            Đăng xuất
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -25,11 +64,9 @@ const LoginDialog = () => {
           Đăng nhập
         </div>
       </DialogTrigger>
-      <Formik
+      <Formik<LoginCredentials>
         initialValues={{ email: "", password: "" }}
-        onSubmit={(values) => {
-          console.log("Form submitted with values:", values);
-        }}
+        onSubmit={handleSubmit}
         enableReinitialize
         validationSchema={loginValidation}
       >
@@ -115,7 +152,7 @@ const LoginDialog = () => {
                         type="submit"
                         variant="primary"
                         fill
-                        disabled={!values.email}
+                        disabled={!values.email || isLoading}
                         onClick={() => {
                           if (!errors.email) {
                             setShowPasswordBox(true);
@@ -131,9 +168,9 @@ const LoginDialog = () => {
                         type="submit"
                         variant="primary"
                         fill
-                        disabled={!values.password}
+                        disabled={!values.password || isLoading}
                       >
-                        Đăng nhập
+                        {isLoading ? "Đang đăng nhập..." : "Đăng nhập"}
                       </Button>
                     )}
                   </div>

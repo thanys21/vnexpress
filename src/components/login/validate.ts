@@ -1,8 +1,8 @@
 import * as yup from "yup";
 
 const loginValidation = yup.object().shape({
-    email: yup.string().email("Invalid email").required("Email is required"),
-    password: yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
+    email: yup.string().email("Email không hợp lệ, vui lòng thử lại").required("Hãy nhập email"),
+    password: yup.string().required("Địa chỉ email hoặc mật khẩu của bạn không chính xác, vui lòng kiểm tra & thử lại"),
 });
 
 export default loginValidation;
