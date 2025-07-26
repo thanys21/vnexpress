@@ -3,7 +3,7 @@ import HomePage from "./components/home-page";
 import Layout from "./components/layout";
 import { AuthProvider } from "./components/auth/AuthProvider";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import AdminPage from "./components/admin/inde";
+import AdminPage from "./components/admin";
 
 const App = () => {
   return (
@@ -11,14 +11,13 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="admin" element={<AdminPage />} />
           <Route path="news" element={<HomePage />} />
           <Route path="news/:id" element={<HomePage />} />
           <Route
-            path="profile"
+            path="admin"
             element={
               <ProtectedRoute>
-                <div>Profile Page - Cần đăng nhập</div>
+                <AdminPage />
               </ProtectedRoute>
             }
           />
