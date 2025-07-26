@@ -25,7 +25,6 @@ const LoginDialog = () => {
   const handleSubmit = async (values: LoginCredentials) => {
     try {
       const success = await login(values);
-      temp(values.email, values.password);
 
       if (success) {
         setShowPasswordBox(false);
@@ -57,15 +56,6 @@ const LoginDialog = () => {
       </div>
     );
   }
-  const temp = async (email: string, password: string) => {
-    await fetch("http://localhost:3001/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-  };
 
   return (
     <Dialog>
