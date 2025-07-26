@@ -1,5 +1,19 @@
-import { MOCK_USERS } from './../../src/lib/mockApi';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+
+export const MOCK_USERS = [
+  {
+    id: "1",
+    email: "admin@vnexpress.com",
+    password: "123456",
+    name: "Admin VnExpress",
+  },
+  {
+    id: "2",
+    email: "user@vnexpress.com",
+    password: "123456",
+    name: "User VnExpress",
+  },
+];
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
     // CORS headers
