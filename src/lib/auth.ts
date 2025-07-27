@@ -5,15 +5,15 @@ const getApiBaseUrl = () => {
   if (typeof window !== 'undefined') {
     // Browser environment
     if (window.location.hostname === 'localhost') {
-      return 'http://localhost:3000/api'; // Development
+      return 'http://localhost:3001/api'; // Development
     }
     return `${window.location.origin}/api`; // Production on Vercel
   }
-  return 'http://localhost:3000/api'; // Fallback
+  return 'http://localhost:3001/api'; // Fallback
 };
 
 const API_BASE_URL = getApiBaseUrl();
-const USE_MOCK_API = import.meta.env.VITE_USE_MOCK_API === 'true' || import.meta.env.DEV;
+const USE_MOCK_API = import.meta.env.VITE_USE_MOCK_API === 'true';
 
 class AuthService {
   async login(

@@ -6,7 +6,8 @@ const Layout = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1">
+      {/* TODO: Add menu bar */}
+      <main className="flex-1 container">
         <Outlet />
       </main>
       <Footer />
