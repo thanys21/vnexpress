@@ -1,9 +1,4 @@
 {
-  "functions": {
-    "api/auth/login.ts": {
-      "maxDuration": 10
-    }
-  },
   "headers": [
     {
       "source": "/api/(.*)",
