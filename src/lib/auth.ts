@@ -2,6 +2,13 @@ import type { LoginCredentials, User } from "@/types/auth";
 import { mockAuthService } from "./mockApi";
 
 const getApiBaseUrl = () => {
+  // Use environment variable if available
+  const envApiUrl = import.meta.env.VITE_API_URL;
+  if (envApiUrl) {
+    return envApiUrl;
+  }
+
+  // Fallback logic
   if (typeof window !== "undefined") {
     // Browser environment
     if (window.location.hostname === "localhost") {
